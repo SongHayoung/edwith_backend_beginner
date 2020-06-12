@@ -26,4 +26,4 @@ tmp/**
 tmp/**/*
 *.tmp
 *.bak
-local.properties
+local.properties 
