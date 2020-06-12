@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlmap xmlns="http://www.epril.com/sqlmap" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.epril.com/sqlmap http://www.epril.com/sqlmap/sqlmap.xsd ">
+    <!-- <sql key="namecardAdd">insert into Namecards(name, phone, company, date) values(?,?,?,utc_timestamp())</sql> -->
+    <sql key="namecardAdd">insert into Namecards(name, phone, company, date) values(?,?,?,?)</sql>
+    <sql key="namecardGet">select * from Namecards where name like ?</sql>
+    <sql key="namecardDeleteAll">delete from Namecards</sql>
+</sqlmap>
