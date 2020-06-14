@@ -1,11 +1,12 @@
 package Screen;
 
-import Domain.NameCard;
 import Service.NameCardService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Scanner;
 
+@Service("mainScreenService")
 public class mainScreenImpl implements mainScreen{
     private NameCardService nameCardService;
     private final boolean DEFAULT_IS_RUNNING = true;
@@ -61,7 +62,7 @@ public class mainScreenImpl implements mainScreen{
         insertCommand("회사 이름을 입력하세요 : ");
         String company = getString();
 
-        nameCardService.addNameCard(new NameCard(name, phone, company));
+        nameCardService.addNameCard(name, phone, company);
 
         insertCommand("--------------------\n");
     }
@@ -69,13 +70,8 @@ public class mainScreenImpl implements mainScreen{
         insertCommand("검색할 이름을 입력하세요 : ");
         String searchName = getString();
 
-        List<NameCard> nameCardList = nameCardService.getNameCards(searchName);
-        for(NameCard nameCard : nameCardList)
-            insertCommand(getNameCardFormat(nameCard));
-    }
-
-    private String getNameCardFormat(NameCard nameCard) {
-        return  "BussinessCard{name='" + nameCard.getName() + "', phone='" + nameCard.getPhone() +
-                "', companyName='" + nameCard.getCompany() + "', createDate=" +nameCard.getDate() + "}\n";
+        List<String> nameCardList = nameCardService.getNameCardsAsString(searchName);
+        for(String nameCard : nameCardList)
+            insertCommand(nameCard);
     }
 }

@@ -2,16 +2,19 @@ package Dao;
 
 import Domain.NameCard;
 import SqlService.SqlService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class NameCardDaoJdbc implements NameCardDao{
-    private SqlService sqlService;
+    @Autowired private SqlService sqlService;
     private JdbcTemplate jdbcTemplate;
     private RowMapper<NameCard> nameCardRowMapper =
             new RowMapper<NameCard>() {
@@ -25,6 +28,7 @@ public class NameCardDaoJdbc implements NameCardDao{
                 }
             };
 
+    @Autowired
     public void setDataSource(DataSource dataSource) { this.jdbcTemplate = new JdbcTemplate(dataSource); }
     public void setSqlService(SqlService sqlService) { this.sqlService = sqlService; }
 

@@ -18,7 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "/Config/applicationContext.xml")
+@ContextConfiguration(classes = Config.AppContext.class)
 public class NameCardServiceTest {
     @Autowired NameCardService nameCardService;
     @Autowired PlatformTransactionManager transactionManager;
@@ -37,9 +37,9 @@ public class NameCardServiceTest {
     public void addAndget() throws SQLException {
         nameCardService.deleteAllNameCards();
 
-        nameCardService.addNameCard(nameCards.get(0));
-        nameCardService.addNameCard(nameCards.get(1));
-        nameCardService.addNameCard(nameCards.get(2));
+        nameCardService.addNameCard(nameCards.get(0).getName(), nameCards.get(0).getPhone(), nameCards.get(0).getCompany());
+        nameCardService.addNameCard(nameCards.get(1).getName(), nameCards.get(1).getPhone(), nameCards.get(1).getCompany());
+        nameCardService.addNameCard(nameCards.get(2).getName(), nameCards.get(2).getPhone(), nameCards.get(2).getCompany());
 
         NameCard nameCardsget1 = nameCardService.getNameCards(nameCards.get(0).getName()).get(0);
         checkSameCard(nameCardsget1,nameCards.get(0));
@@ -55,8 +55,8 @@ public class NameCardServiceTest {
     public void getList() throws SQLException{
         nameCardService.deleteAllNameCards();
 
-        nameCardService.addNameCard(nameCards.get(0));
-        nameCardService.addNameCard(nameCards.get(1));
+        nameCardService.addNameCard(nameCards.get(0).getName(), nameCards.get(0).getPhone(), nameCards.get(0).getCompany());
+        nameCardService.addNameCard(nameCards.get(1).getName(), nameCards.get(1).getPhone(), nameCards.get(1).getCompany());
 
         List<NameCard> nameCardgetlist = nameCardService.getNameCards(nameCards.get(0).getName().substring(0,2));
         assertThat(nameCardgetlist.size(), is(2));

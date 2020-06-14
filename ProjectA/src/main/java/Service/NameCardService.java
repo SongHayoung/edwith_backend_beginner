@@ -7,8 +7,9 @@ import java.util.List;
 
 @Transactional
 public interface NameCardService {
-    void addNameCard(NameCard nameCard);
+    void addNameCard(String name, String phone, String Company);
     void deleteAllNameCards();
     @Transactional(readOnly = true)
     List<NameCard> getNameCards(String name);
+    List<String> getNameCardsAsString(String name);
 }
